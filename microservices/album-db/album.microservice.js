@@ -48,11 +48,9 @@ class AlbumDbMicroservice {
      */
   find = async (req, res, next) => {
     try {
-      const findQuery = { _id: { $ne: null }};
+      const findResult = await AlbumModel.find()
 
-      const findResult = await AlbumModel.find(findQuery).lean().exec();
-
-      res.status(httpStatusCodes.OK).send(findResult[0]);
+      res.status(httpStatusCodes.OK).send(findResult);
     } catch (error) {
       next(error);
       return;
@@ -67,7 +65,18 @@ class AlbumDbMicroservice {
      * @param {express.Next} next is the middleware to continue with code execution
      * @returns {Object} Empty object if the operation went well
      */
-  updateById = async (req, res, next) => { }
+     updateById = async (req, res, next) => { 
+      let documentId = req.params.id;
+      let updateQuery = { _id: documentId };
+      AlbumModel.updateOne(updateQuery, {$set: {title: req.body.title, year: req.body.year, artist: req.body.artist, photoUrl: req.body.photoUrl}}).then(updateResult => {
+       
+  
+        res.status(httpStatusCodes.OK).send(updateResult);
+      }).catch(error => {
+        next(error);
+      });
+    }
+  }
 
     /**
      * @summary Delete a document
@@ -94,6 +103,6 @@ class AlbumDbMicroservice {
       next(error);
     });
   }
-}
+
 
 module.exports = AlbumDbMicroservice;
