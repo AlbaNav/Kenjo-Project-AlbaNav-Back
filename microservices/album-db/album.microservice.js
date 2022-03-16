@@ -68,7 +68,7 @@ class AlbumDbMicroservice {
      updateById = async (req, res, next) => { 
       let documentId = req.params.id;
       let updateQuery = { _id: documentId };
-      AlbumModel.updateOne(updateQuery, {$set: {title: req.body.title, year: req.body.year, artist: req.body.artist, photoUrl: req.body.photoUrl, rate:req.body.rate}}).then(updateResult => {
+      AlbumModel.updateOne(updateQuery, {$set: {title: req.body.title, year: req.body.year, artist: req.body.artist, photoUrl: req.body.photoUrl, score:req.body.score}}).then(updateResult => {
        
   
         res.status(httpStatusCodes.OK).send(updateResult);

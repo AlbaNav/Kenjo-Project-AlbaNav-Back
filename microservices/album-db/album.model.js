@@ -9,8 +9,7 @@ const albumSchema = {
     year: { type: Number, required: true },
     artist: { type: String, required: true, trim: true },
     photoUrl: { type: String, trim: true },
-    rate: { type: String, trim: true } // Modify this field as you need
-    // Add any  fields you need
+    score: { type: Number, trim: true } 
 };
 
 const albumDbModel = mongoose.model(COLLECTION_NAME, albumSchema);
