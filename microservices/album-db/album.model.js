@@ -1,4 +1,5 @@
 
+const { string } = require('check-types');
 const mongoose = require('mongoose');
 
 const COLLECTION_NAME = 'album-db';
@@ -8,7 +9,7 @@ const albumSchema = {
     year: { type: Number, required: true },
     artist: { type: String, required: true, trim: true },
     photoUrl: { type: String, trim: true },
-    score: { type: Number } // Modify this field as you need
+    rate: { type: String, trim: true } // Modify this field as you need
     // Add any  fields you need
 };
 
